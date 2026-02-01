@@ -1,0 +1,21 @@
+flowchart TD
+    subgraph data [Data]
+        Raw[Raw Prices]
+        Feat[Features + Indicators]
+        Tensors[X, y, dates]
+    end
+    subgraph model [Model]
+        Train[Train VariationalLSTM]
+        Tune[Hyperparameter Tuning]
+    end
+    subgraph alloc [Allocation]
+        Pred[Predict returns and vols]
+        Cov[Covariance matrix]
+        Opt[Optimize weights]
+    end
+    subgraph eval [Evaluation]
+        Backtest[Monthly rebalance backtest]
+        Metrics[Sharpe, cumulative returns]
+    end
+    Raw --> Feat --> Tensors --> Train --> Tune
+    Tune --> Pred --> Cov --> Opt --> Backtest --> Metrics
